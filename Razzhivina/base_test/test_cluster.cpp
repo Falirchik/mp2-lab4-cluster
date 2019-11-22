@@ -2,7 +2,7 @@
 #include <gtest.h>
 
 TEST(Cluster, can_create_cluster){
-	ASSERT_NO_THROW(cluster cl(5));
+	ASSERT_NO_THROW(Cluster cl(5));
 }
 
 TEST(cluster, cannot_create_cluster_with_negative_count_of_processors){

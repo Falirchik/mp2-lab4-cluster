@@ -35,20 +35,20 @@ public:
 		for (int i = 0; i < _tact; i++) {
 			Task tmp;
 			queue.addEnd(tmp);
-			st.CreateTask++;
+			st.CreateTask();
 			while (!queue.isEmpty()) {					//пока очередь не пуста
 				Task tmp2 = queue.PopLast();			//
-				if (tmp2.getCCPU <= freeproc) {
+				if (tmp2.getCCPU() <= freeproc) {
 					ExecutableTask.AddTask(tmp2);
-					queue.PopFirst;
-					freeproc = freeproc - tmp2.getCCPU;
+					queue.PopFirst();
+					freeproc = freeproc - tmp2.getCCPU();
 				}
 				else break;
 			}
 			ExecutableTask.Done();
-			int i_tmp = ExecutableTask.NumberOfTask;
-			i_tmp = i_tmp - ExecutableTask.PullExecutableTask;
-			freeproc = freeproc + ExecutableTask.PullExecutableTask;
+			int i_tmp = ExecutableTask.NumberOfTask();
+			i_tmp = i_tmp - ExecutableTask.PullExecutableTask();
+			freeproc = freeproc + ExecutableTask.PullExecutableTask();
 			st.AddDone(i_tmp);
 			st.InQueue(queue.getCElem());					
 			st.Average((proc - freeproc) / proc * 100);		//занятые процессоры/процессоры*100%

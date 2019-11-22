@@ -23,7 +23,7 @@ int main() {
 
 	Cluster cl(_cpu);
 	cl.StartCluster(tact);
-	cl.Print;
+	cl.Print();
 
 	system("pause");
 	return 0;

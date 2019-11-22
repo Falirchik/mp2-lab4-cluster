@@ -38,7 +38,7 @@ TEST(Queue, can_push_in_queue_with_free_end) {
 		que.addEnd(i);
 		i--;
 	}
-	que.PopFirst;
+	que.PopFirst();
 	ASSERT_ANY_THROW(que.addEnd(5));
 }
 
@@ -57,6 +57,6 @@ TEST(Queue, can_pop_and_push_element)
 	Queue<int> que(5);
 	que.addEnd(5);
 	que.addEnd(1);
-	EXPECT_EQ(que.PopFirst, 5);
-	EXPECT_EQ(que.PopFirst, 1);
+	EXPECT_EQ(que.PopFirst(), 5);
+	EXPECT_EQ(que.PopFirst(), 1);
 }

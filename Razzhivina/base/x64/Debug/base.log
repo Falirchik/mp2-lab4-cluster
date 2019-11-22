@@ -1,1 +1,3 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets\v141\Toolset.targets(36,5): error MSB8036: не удалось найти Windows SDK версии 10.0.17763.0. Установите нужную версию Windows SDK или измените версию SDK на страницах свойств проекта либо щелкнув правой кнопкой мыши решение и выбрав "Изменить целевую платформу решения".
+﻿  sample_cluster.cpp
+e:\Work\github\mp2\mp2-2019-gr1803-1\razzhivina\mp2-lab4-cluster\Razzhivina\base\sample_cluster.cpp(15,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  base.vcxproj -> E:\Work\github\mp2\mp2-2019-gr1803-1\razzhivina\mp2-lab4-cluster\Razzhivina\x64\Debug\base.exe
