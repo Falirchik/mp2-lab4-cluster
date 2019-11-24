@@ -1,3 +1,8 @@
 ﻿  sample_cluster.cpp
+<<<<<<< HEAD
 e:\Work\github\mp2\mp2-2019-gr1803-1\razzhivina\mp2-lab4-cluster\Razzhivina\base\sample_cluster.cpp(15,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   base.vcxproj -> E:\Work\github\mp2\mp2-2019-gr1803-1\razzhivina\mp2-lab4-cluster\Razzhivina\x64\Debug\base.exe
+=======
+c:\yaimp\mp2-lab4-cluster\razzhivina\base\sample_cluster.cpp(15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  base.vcxproj -> C:\YaiMP\mp2-lab4-cluster\Razzhivina\x64\Debug\base.exe
+>>>>>>> lab4.0
