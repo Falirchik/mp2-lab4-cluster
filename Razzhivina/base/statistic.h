@@ -34,11 +34,7 @@ public:
 		AverageLoad = AverageLoad + count;
 	}
 	void Print() {
-<<<<<<< HEAD
-		cout << "\t ÑÒÀÒÈÑÒÈÊÀ";
-=======
 		cout << "\t ÑÒÀÒÈÑÒÈÊÀ" << endl;
->>>>>>> lab4.0
 		cout << "Çàâåðøåííûõ çàäà÷: \t" << ExecutableTask << endl;
 		cout << "Cîçäàííûõ çàäà÷: \t" << CreatedTask << endl;
 		cout << "Çàäà÷è â î÷åðåäè: \t" << TaskInQueue << endl;
