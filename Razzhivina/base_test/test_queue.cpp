@@ -13,14 +13,14 @@ TEST(Queue, cannot_create_queue_with_large_lenght) {
 	ASSERT_ANY_THROW(Queue <int> que(MAX_QUEUE_SIZE+1));
 }
 
-TEST(Queue, full_is_correct){
+TEST(Queue, empty_is_correct){
 	Queue<int> que(2);
 	EXPECT_EQ(que.isEmpty(), true);
 	que.addEnd(1);
 	EXPECT_EQ(que.isEmpty(), false);
 }
 
-TEST(Queue, empty_is_correct){
+TEST(Queue, full_is_correct){
 	Queue<int> que(2);
 	que.addEnd(1);
 	que.addEnd(2);

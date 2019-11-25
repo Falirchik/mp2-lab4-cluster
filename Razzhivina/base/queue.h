@@ -5,6 +5,7 @@
 const int MAX_QUEUE_SIZE = 10000;
 
 template<typename T>
+
 class Queue{
 	T *pQue;							//указатель на очередь
 	int /*begin,*/
@@ -14,11 +15,11 @@ class Queue{
 
 public:
 	Queue(int sz = 1):		//конструктор-инициализатор
-		end(-1),CElem(0), pQue (new T[size])/* size(0)*/{
-		size = sz;
+		end(-1),CElem(0)/*, pQue (new T[size])*/, size(sz){
+		
 		if ((size < 1) || (size > MAX_QUEUE_SIZE))
 			throw "выход за позволенные размеры очереди";
-		/*pQue = new T[size];		*/
+		pQue = new T[size+1];		
 	}
 	
 	//Queue(const Queue<T> &_queue) :		//конструктор копирования
@@ -54,7 +55,7 @@ public:
 		if (isEmpty())
 			throw ("нет элеметов");
 		CElem--;							//уменьшаем количество элементов
-		int tmp = (end+size-CElem) % size;		
+		int tmp = (size-CElem+end) % size;		
 		return pQue[tmp];					//возвращаем 
 	}
 

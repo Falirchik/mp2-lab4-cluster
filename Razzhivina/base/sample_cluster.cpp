@@ -20,11 +20,14 @@ int main() {
 	cout << "Введите количество тактов: \t";
 	cin >> tact;
 	
-
-	Cluster cl(_cpu);
-	cl.StartCluster(tact);
-	cl.PrintStatistic();
-
+	try {
+		Cluster cl(_cpu);
+		cl.StartCluster(tact);
+		cl.PrintStatistic();
+	}
+	catch (const char*str) {
+		cout << str<<endl;
+	}
 	system("pause");
 	return 0;
 }

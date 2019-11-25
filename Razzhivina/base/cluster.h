@@ -6,7 +6,8 @@
 #include <iostream>
 
 using namespace std;
-const int MAX_CPU_SIZE = 30;
+const int MAX_CPU_SIZE = 30,
+		  MAX_CPU_SIZE_FOR_CLUSTER = 10000;
 
 class Cluster {
 	int proc;					//процессоры
@@ -16,11 +17,13 @@ class Cluster {
 	Queue <Task> queue;			//очередь из задач
 
 public:
-	Cluster(int _proc):queue(MAX_QUEUE_SIZE){
-		if ((_proc < 1) || (_proc > MAX_CPU_SIZE))
-			throw "ошибка";
-		proc = _proc;
-		freeproc = _proc;		//так как только создали, то все процессоры свободные
+	Cluster(int _proc):queue(MAX_QUEUE_SIZE),proc(_proc), freeproc(_proc){
+		if ((_proc < 1) || (_proc > MAX_CPU_SIZE_FOR_CLUSTER))
+			throw "Отрицательное или слишком большое количество процессоров";
+		/*proc = _proc;*/
+		/*freeproc = _proc;*/
+		
+				//так как только создали, то все процессоры свободные
 		
 	}
 	~Cluster() {				//а нужен ли...
@@ -33,7 +36,7 @@ public:
 	}
 	void StartCluster(int _tact = 1) {
 		if (_tact < 1)
-			throw "малое количество тактов";
+			throw "ошибка запуска кластера";
 		for (int i = 0; i < _tact; i++) {
 			Task tmp;
 			queue.addEnd(tmp);

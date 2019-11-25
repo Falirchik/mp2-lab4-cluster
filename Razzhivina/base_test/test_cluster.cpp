@@ -10,7 +10,7 @@ TEST(Cluster, cannot_create_cluster_with_negative_count_of_processors){
 }
 
 TEST(Cluster, cannot_create_cluster_with_large_count_of_processors) {
-	ASSERT_ANY_THROW(Cluster cl(MAX_CPU_SIZE+1));
+	ASSERT_ANY_THROW(Cluster cl(MAX_CPU_SIZE_FOR_CLUSTER+1));
 }
 
 TEST(Cluster, can_Start_Cluster){
