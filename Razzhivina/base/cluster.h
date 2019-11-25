@@ -6,8 +6,7 @@
 #include <iostream>
 
 using namespace std;
-const int MAX_CPU_SIZE = 30,
-		  MAX_CPU_SIZE_FOR_CLUSTER = 10000;
+const int  MAX_CPU_SIZE_FOR_CLUSTER = 100;
 
 class Cluster {
 	int proc;					//процессоры
@@ -20,11 +19,6 @@ public:
 	Cluster(int _proc):queue(MAX_QUEUE_SIZE),proc(_proc), freeproc(_proc){
 		if ((_proc < 1) || (_proc > MAX_CPU_SIZE_FOR_CLUSTER))
 			throw "ќтрицательное или слишком большое количество процессоров";
-		/*proc = _proc;*/
-		/*freeproc = _proc;*/
-		
-				//так как только создали, то все процессоры свободные
-		
 	}
 	~Cluster() {				//а нужен ли...
 		proc = 0;
@@ -38,14 +32,15 @@ public:
 		if (_tact < 1)
 			throw "ошибка запуска кластера";
 		for (int i = 0; i < _tact; i++) {
-			Task tmp;
-			queue.addEnd(tmp);
-			st.CreateTask();
+			Task tmp;									//создаем задачу
+			queue.addEnd(tmp);							//добавл€ем ее в очередь
+			st.CreateTask();							//+1 в статистике к созданным задачам
 			while (!queue.isEmpty()) {					//пока очередь не пуста
-				Task tmp2 = queue.PopLast();			//
-				if (tmp2.getCCPU() > freeproc)	break;
-				else {
-					ExecutableTask.AddTask(tmp2);
+				Task tmp2 = queue.PopLast();				//создаем задачу, вз€в ее из очереди
+				if (tmp2.getCCPU() > freeproc)	break;		//если необходимое количество процессоров больше - пропускаем
+				else {										//иначе
+
+					ExecutableTask.AddTask(tmp2);			//список выполненых задач - добавить. ѕроблема. ѕересмотреть метод
 					queue.Pop();
 					freeproc = freeproc - tmp2.getCCPU();
 				}

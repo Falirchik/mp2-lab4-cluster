@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-const int MAX_QUEUE_SIZE = 10000;
+const int MAX_QUEUE_SIZE = 1000;
 
 template<typename T>
 
@@ -19,7 +19,7 @@ public:
 		
 		if ((size < 1) || (size > MAX_QUEUE_SIZE))
 			throw "выход за позволенные размеры очереди";
-		pQue = new T[size+1];		
+		pQue = new T[size];		
 	}
 	
 	//Queue(const Queue<T> &_queue) :		//конструктор копирования
@@ -71,15 +71,13 @@ public:
 	//}
 
 	bool isFull() {
-	/*	if (CElem != size)
+		if (CElem != size)
 			return false;
-		else return true;*/
-		return CElem == size;
+		else return true;
 	}
 	bool isEmpty() {
-		/*if (CElem > 0)
+		if (CElem > 0)
 			return false;
-		else return true;*/
-		return CElem == 0;
+		else return true;
 	}
 };

@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 
-int const MAXTIME = 30, MAXCPU = 30;
+int const MAXTIME = 30, MAXCPU = 20;		//можно регулировать, сколько максимум может быть процессоров в таске для выполнения и сколько оно будет выполняться
 
 class Task{
 	int Time,				//время на выполнение
@@ -29,7 +29,9 @@ public:
 		int tmp = Time - Tact;
 		return (0 >= tmp);
 	}
-
+	bool operator<(const Task &_task) {		//необходимо для сортировки тасков по времени
+		return ((_task.Time - _task.Tact) < (Time - Tact));
+	}
 
 	//Task& operator=(const Task & tTask) {
 	//	if (this != &tTask) {
@@ -50,84 +52,58 @@ struct Node {
 };
 
 class TaskList {
-	Node *pFirst;
+	Node *pFirst, *tail;
 	int size;
 public:
 	TaskList() :							//конструктор по умолчанию
-		pFirst(nullptr), size(0) {}
+		pFirst(nullptr), tail(nullptr), size(0) {}
 	
-	~TaskList() {Node *p = pFirst;						//деструктор
-		while (pFirst != nullptr) {
-			
-			pFirst = p->pNext;
-			delete p;
-		}
+	~TaskList() {						//деструктор
+		delete pFirst;
+		delete tail;
 	}
-	void AddTask(const Task &_task) {		//добавить задачу в конец списка
-		
-	/*	Node *p = pFirst;
-		if (pFirst) {
-			while (p->pNext)
-				p = p->pNext;
-			p->pNext = new Node;
-			p->data = _task;
-		}
-		else pFirst = new Node;*/
-											
-		Node *p = new Node;
-		p->data = _task;
-		p->pNext = nullptr;
-		if (size != 0){
-			int i = 0;
-			Node *p1 = pFirst;
-			Node *p2 = nullptr;
-			for (i = 0; i < size; i++)	{
-				if (p2 != nullptr)
+
+		void AddTask(const Task &_task) {		//добавить задачу в конец списка
+												//... n hours later
+												//допустим, что не в конец списка, а куда-то, сортируя по времени, необходимому на выполнение
+												//тогда нужна функция сравнения времени переданного таска и того, что есть на данной позиции
+			Node *p = new Node;					//создаем звено
+			p->pNext = nullptr;					//делаем его последним
+			p->data = _task;					//записываем для будущего сравнения
+			if (size == 0) 						//если размер ноль
+				pFirst = p;
+			else {								//иначе
+				Node *p1 = pFirst,
+					 *p2 = nullptr;
+				int i = 0;
+				while (i < size) {				
+					if (p->data < p1->data) {	//если меньше можем впихнуть
+						if (p2 == nullptr)		
+							pFirst = p;
+						else
+							p2->pNext = p;
+						p->pNext = p1;
+						break;
+					}
+					p2 = p1;
+					p1 = p1->pNext;
+					i++;
+				}
+				if (i == size)
 					p2->pNext = p;
-				else
-					pFirst = p;
-				p->pNext = p1;
-
-				p2 = p1;
-				p1 = p1->pNext;
 			}
-			if (i == size)
-				p2->pNext = p;
+			size++; 
+			
 		}
-		else pFirst = p;
-		size++;
-
-		/*Node *p = pFirst;
-		if (pFirst) {
-			while (p->pNext)
-				p = p->pNext;
-			p->pNext = new Node;
-			p->data = _task;
-		}
-		else {
-			pFirst = new Node;
-			p = pFirst;
-			p->pNext = nullptr;
-			p->data = _task;
-		}*/
-										
-		/*Node *p = pFirst;
-		while (p->pNext != nullptr)
-			p = p->pNext;
-		p->pNext = new Node;
-		p->pNext->data = _task;
-		p->pNext->pNext = nullptr;
-		size++;*/
-	}
-
-	void Done() {
+		void Done() {
 		Node *p = pFirst;
 		for (int i = 0; i < size; i++) {
 			p->data.CountTact();
 			p = p->pNext;
 		}
-		/*int i = 0;
-		while (i<size-1) {
+		/*Node *p = pFirst;
+		int i = 0;
+		while (i < size - 1) {
 			p->data.CountTact();
 			p = p->pNext;
 			i++;
@@ -136,6 +112,7 @@ public:
 
 	int NumberOfTask() { return size; }
 
+	
 	//bool isFull() {
 	//	Node *p = new Node;
 	//	if (p == nullptr)
